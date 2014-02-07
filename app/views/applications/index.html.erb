@@ -13,17 +13,14 @@
       <tbody>
         <% @applications.each do |application| %>
           <tr>
-            <td><h2><%= application.name %></h2></td>
-            <td><%= link_to 'Show', application_requests_path(application) %></td>
-            <td><%= link_to 'Edit', edit_application_path(application) %></td>
+            <td><h2><%= link_to application.name, application_requests_path(application) %></h2></td>
+            <td><div class="btn btn-lg btn-success passing-icon"><%=application.successful_requests_count%> Successful</div></td>
+            <td><div class="btn btn-lg btn-warning failing-icon"><%=application.failing_requests_count%> Failing</div></td>
             <td><%= link_to 'Destroy', application, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
+    <br>
+    <%= link_to 'New application', new_application_path %>
 </div>
-
-
-<br>
-
-<%= link_to 'New application', new_application_path %>

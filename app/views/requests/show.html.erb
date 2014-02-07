@@ -1,4 +1,20 @@
-<p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', 'applications/'+@request.application_id.to_s+'/requests/'+@request.id.to_s %> |
-<%= link_to 'Back', application_requests_path(@request) %>
+<div class="index-container">
+	<div>
+	  <h1><%=@request.name%></h1>
+	</div>
+
+	<% if @request.passing %>
+		<div class="btn btn-lg btn-success passing-indicator">Success</div>
+	<% else %>
+		<div class="btn btn-lg btn-warning failure-indicator">Failure</div>
+	<% end %>
+
+	<br>
+	<div class="row">
+		<%= link_to 'Modify Request', 'applications/'+@request.application_id.to_s+'/requests/'+@request.id.to_s %> |
+		<%= link_to 'Back', application_requests_path(@request) %>
+	</div>
+
+</div>
+
