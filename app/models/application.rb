@@ -17,7 +17,7 @@ class Application < ActiveRecord::Base
 	def get_count
 		output = 0
 		self.requests.each do |r|
-			output +=1 if r.passing
+			output +=1 if r.passing.class == TrueClass
 		end
 		output
 	end

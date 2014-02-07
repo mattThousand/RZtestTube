@@ -15,7 +15,7 @@
         <tr>
           <td><h2><%= link_to request.name, '/applications/'+request.application_id.to_s+'/requests/'+request.id.to_s %></h2></td>
           <td>
-            <% if request.passing %>
+            <% if request.passing.class == TrueClass %>
               <div class="btn btn-lg btn-success passing-icon">Success</div>
             <% else %>
               <div class="btn btn-lg btn-warning failing-icon">Failing</div>

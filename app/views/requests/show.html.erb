@@ -2,19 +2,34 @@
 <div class="index-container">
 	<div>
 	  <h1><%=@request.name%></h1>
+	  <h2><%=@request.passing%></h2>
 	</div>
 
-	<% if @request.passing %>
+	<% if @request.passing.class == TrueClass %>
 		<div class="btn btn-lg btn-success passing-indicator">Success</div>
 	<% else %>
 		<div class="btn btn-lg btn-warning failure-indicator">Failure</div>
+		<br>
+		<h5><%=@request.response_code%></h5>
 	<% end %>
-
 	<br>
+	<h6>Type: <%= @request.req_type %><h6>
+	<br>
+	<h6>
+		Header: <br><% @request.header.h_params.each do |p| %>
+			{
+				<p><%= p.name %>: <%= p.value %></p>
+			}
+		<% end %>
+	</h6>
+	<br>
+	<h6>
+		Body: <br><%= @request.body%>
+	<br>
+	</h6>
 	<div class="row">
-		<%= link_to 'Modify Request', 'applications/'+@request.application_id.to_s+'/requests/'+@request.id.to_s %> |
+		<%= link_to 'Modify Request', '/applications/'+@request.application_id.to_s+'/requests/'+@request.id.to_s+"/edit" %> |
 		<%= link_to 'Back', application_requests_path(@request) %>
 	</div>
 
 </div>
-
