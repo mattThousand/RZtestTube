@@ -1,0 +1,27 @@
+<div class="index-container">
+  <h1>Requests</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @requests.each do |request| %>
+        <tr>
+          <td><h2><%= request.name %></h2></td>
+          <td><%= link_to 'Show', '/applications/'+request.application_id.to_s+'/requests/'+request.id.to_s %></td>
+          <td><%= link_to 'Edit','/applications/'+request.application_id.to_s+'/requests/'+request.id.to_s+'edit' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'New request', new_application_request_path %>

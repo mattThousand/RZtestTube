@@ -1,0 +1,45 @@
+body {
+/*	background: #444;
+*/
+	background: #444;
+
+}
+
+.header-container {
+	padding-bottom: 9px;
+	margin: 20px 0 30px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.page-heading {
+	font-size: 65px;
+	font-weight: 200;
+	margin-left: 5%;
+}
+
+
+div.header {
+	background: #ec594d;
+}
+
+.header-text{
+	color: #444;
+}
+
+td a {
+	color: #ec594d;
+}
+
+
+h1, h2, h3, h4, h5, h6, p, a {
+	font-family: 'Josefin Sans', sans-serif !important;
+	font-weight: 400;
+	font-style: normal;
+	color: #ec594d;
+	text-rendering: optimizeLegibility;
+	line-height: 1.1;
+}
+
+.index-container {
+	margin-left: 8%;
+}

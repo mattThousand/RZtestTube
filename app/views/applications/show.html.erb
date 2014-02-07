@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<div class="index-container">
+  <h1>Listing requests</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @requests.each do |request| %>
+          <tr>
+            <td><h2><%= request.name %></h2></td>
+            <td><%= link_to 'Show', application_request_path %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+
+<%= link_to 'Back', applications_path %>

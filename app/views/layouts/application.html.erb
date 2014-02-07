@@ -5,10 +5,18 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <meta charset="utf-8" />
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300,400' rel='stylesheet' type='text/css'>
+  </head>
 </head>
 <body>
+<div class="header-container">
+	<h1 class="page-heading">RZtestTube</h1>
+</div>
 
-<%= yield %>
+<div class="content">
+	<%= yield %>
+</div>
 
 </body>
 </html>

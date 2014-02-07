@@ -1,0 +1,4 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Edit', 'applications/'+@request.application_id.to_s+'/requests/'+@request.id.to_s %> |
+<%= link_to 'Back', application_requests_path(@request) %>
