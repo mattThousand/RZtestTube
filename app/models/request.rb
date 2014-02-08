@@ -1,7 +1,5 @@
 class Request < ActiveRecord::Base
 
-	require 'json'
-
 	has_one :header
 	belongs_to :application
 
@@ -13,73 +11,54 @@ class Request < ActiveRecord::Base
 	validate :json_format
 
 
-	def passing
 
-		h_params = {}
+	def passing
 
 		uri = URI.parse(self.url)
 
-		if self.req_type == 'post' && !uri.path.empty?
+		http = Net::HTTP.new(uri.host, uri.port)
 
-			http = Net::HTTP.new(uri.host, uri.port)
-			http.use_ssl = true
-			request = Net::HTTP::Post.new(uri.path) 
-			request.body = JSON.parse(self.body).to_json if self.body
-			request["Content-Type"] = "application/json"
+		http.use_ssl = true if uri.scheme == "https"
 
-			if self.header 
-				self.header.h_params.each do |p|
-					request[p.name] = p.value
-				end
-			end
 
-			# return http.request(request) == 200
-			return http.request(request)
+		if self.req_type == 'post'
+			data = parse_body(self.body)
+			headers = JSON.parse(self.headers)
 
-		else
-
-			# if self.header
-			# 	self.header.h_params.each do |p|
-			# 		h_params[p.name] = p.value
-			# 	end
-			# end
-
-			# return http_get(uri.path, h_params)
-			return true
+			response, data = http.post(uri.path, data, headers)
+		elsif req_type == 'get' 
+			headers = JSON.parse(self.headers)
+			response, data = http.get(uri.path, headers)
 		end
 
-		# if self.application.name != "Sunsprite-Kinvey"
-		# 	return false
-		# else
-		# 	return true
-		# end
+
+		if response.class < Net::HTTPSuccess
+			return true
+		else
+			self.response_code = response.code.to_s + ": " + response.message
+			return false
+		end
 
 	end
 
 	private
 
-		def http_post(url, params)
-			response = Net::HTTP.post(url, params)
-			if response.class < Net::HTTPSuccess
-				return true
-			else
-				self.response_code = response.code.to_s
-				return false
-			end
-		end
+		def parse_body(body)
 
-		def http_get(url, h_params)
-	    response = Net::HTTP.get(url)
-	    if response.class < Net::HTTPSuccess
-				return true
-			else
-				self.response_code = response.code.to_s
-				return false
+			output = []
+
+			body = JSON.parse(body)
+
+			body.each do |k,v|
+				output.push(k.to_s + "=" + v.to_s)
 			end
+
+			output.join("&")
+
 		end
 
 	  def json_format
-	  	if self.req_type = 'post'
+	  	if self.req_type == 'post'
 		  	begin
 		      !!JSON.parse(headers)
 		    rescue

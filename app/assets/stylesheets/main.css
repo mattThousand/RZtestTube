@@ -17,6 +17,10 @@ body {
 	margin-left: 5%;
 }
 
+.response-code-failure {
+	color: #f1c40f;
+}
+
 a {
 	text-decoration: none;
 }
@@ -45,6 +49,7 @@ a {
 	padding-bottom: 20px;
 	float: right;
 }
+
 
 div.header {
 	background: #ec594d;

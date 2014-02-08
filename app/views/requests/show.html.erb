@@ -2,7 +2,6 @@
 <div class="index-container">
 	<div>
 	  <h1><%=@request.name%></h1>
-	  <h2><%=@request.passing%></h2>
 	</div>
 
 	<% if @request.passing.class == TrueClass %>
@@ -10,7 +9,7 @@
 	<% else %>
 		<div class="btn btn-lg btn-warning failure-indicator">Failure</div>
 		<br>
-		<h5><%=@request.response_code%></h5>
+		<h5 class="response-code-failure"><%=@request.response_code%></h5>
 	<% end %>
 	<br>
 	<h6>Type: <%= @request.req_type %><h6>
@@ -25,7 +24,7 @@
 	</h6>
 	<div class="row">
 		<%= link_to 'Modify Request', '/applications/'+@request.application_id.to_s+'/requests/'+@request.id.to_s+"/edit" %> |
-		<%= link_to 'Back', '/applications/'+(@request.application_id.to_s) %>
+		<%= link_to 'Requests', '/applications/'+(@request.application_id.to_s) %>
 		<br>
 		<%= link_to 'Destroy', application_request_path(@request.application, @request), method: :delete, data: { confirm: 'Are you sure?' } %>
 	</div>
