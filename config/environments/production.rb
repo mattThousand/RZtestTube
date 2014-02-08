@@ -1,6 +1,6 @@
 Kintest3::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  require 'net/http'
   # Code is not reloaded between requests.
   config.cache_classes = true
 
