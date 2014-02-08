@@ -1,17 +1,24 @@
-<%= form_for(@application) do |f| %>
-  <% if @application.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@application.errors.count, "error") %> prohibited this application from being saved:</h2>
+<div class="form-container">
+  <%= form_for(@application) do |f| %>
+    <% if @application.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@application.errors.count, "error") %> prohibited this application from being saved:</h2>
 
-      <ul>
-      <% @application.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @application.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit class: "btn btn-lg btn-success passing-icon submit" %>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

@@ -21,13 +21,18 @@ a {
 	text-decoration: none;
 }
 
-
 .passing-icon, .failing-icon {
 	margin-left: 50px;
 	margin-right: 50px;
 	padding-top: 12px;
 	padding-bottom: 10px;
 }
+
+.passing-icon.submit {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
 
 .index-container div {
 	display: inline-block;
@@ -63,7 +68,16 @@ h1, h2, h3, h4, h5, h6, p, a {
 	line-height: 1.1;
 }
 
-.index-container {
+li {
+	color:#ec594d;
+	list-style: none;
+}
+
+label {
+	color:#ec594d;
+}
+
+.index-container, .form-container {
 	margin-left: 20%;
 	margin-right: 20%;
 }

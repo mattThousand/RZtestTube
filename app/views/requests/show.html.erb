@@ -16,11 +16,7 @@
 	<h6>Type: <%= @request.req_type %><h6>
 	<br>
 	<h6>
-		Header: <br><% @request.header.h_params.each do |p| %>
-			{
-				<p><%= p.name %>: <%= p.value %></p>
-			}
-		<% end %>
+		Headers: <br><%= @request.headers %>
 	</h6>
 	<br>
 	<h6>
@@ -29,7 +25,9 @@
 	</h6>
 	<div class="row">
 		<%= link_to 'Modify Request', '/applications/'+@request.application_id.to_s+'/requests/'+@request.id.to_s+"/edit" %> |
-		<%= link_to 'Back', application_requests_path(@request) %>
+		<%= link_to 'Back', '/applications/'+(@request.application_id.to_s) %>
+		<br>
+		<%= link_to 'Destroy', application_request_path(@request.application, @request), method: :delete, data: { confirm: 'Are you sure?' } %>
 	</div>
 
 </div>

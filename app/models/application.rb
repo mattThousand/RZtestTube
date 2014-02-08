@@ -2,6 +2,7 @@ class Application < ActiveRecord::Base
 
 	has_many :requests
 
+	validates_presence_of :name
 
 	def successful_requests_count
 		get_count

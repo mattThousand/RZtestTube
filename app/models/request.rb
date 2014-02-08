@@ -1,7 +1,16 @@
 class Request < ActiveRecord::Base
 
+	require 'json'
+
 	has_one :header
 	belongs_to :application
+
+	validates_presence_of :headers,
+		:name,
+		:url,
+		:req_type
+
+	validate :json_format
 
 
 	def passing
@@ -10,11 +19,11 @@ class Request < ActiveRecord::Base
 
 		uri = URI.parse(self.url)
 
-		if self.req_type == 'post'
+		if self.req_type == 'post' && !uri.path.empty?
 
 			http = Net::HTTP.new(uri.host, uri.port)
 			http.use_ssl = true
-			request = Net::HTTP::Post.new(uri.path)
+			request = Net::HTTP::Post.new(uri.path) 
 			request.body = JSON.parse(self.body).to_json if self.body
 			request["Content-Type"] = "application/json"
 
@@ -68,5 +77,22 @@ class Request < ActiveRecord::Base
 				return false
 			end
 		end
+
+	  def json_format
+	  	if self.req_type = 'post'
+		  	begin
+		      !!JSON.parse(headers)
+		    rescue
+		      errors[:base] << "Header and body must both be in json format"
+		    end
+		   else
+		   	begin
+		      !!JSON.parse(headers)
+		      !!JSON.parse(body)
+		    rescue
+		      errors[:base] << "Header and body must both be in json format"
+		    end
+		   end
+	  end
 
 end

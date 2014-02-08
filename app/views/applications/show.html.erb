@@ -1,26 +1,35 @@
-<p id="notice"><%= notice %></p>
-
 <div class="index-container">
-  <h1>Listing requests</h1>
+  <h1>Requests</h1>
 
-    <table>
-      <thead>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @application.requests.each do |request| %>
         <tr>
-          <th></th>
-          <th></th>
-          <th></th>
+          <td><h2><%= link_to request.name, '/applications/'+request.application_id.to_s+'/requests/'+request.id.to_s %></h2></td>
+          <td>
+            <% if request.passing.class == TrueClass %>
+              <div class="btn btn-lg btn-success passing-icon">Success</div>
+            <% else %>
+              <div class="btn btn-lg btn-warning failing-icon">Failing</div>
+            <% end %>
+          </td>
         </tr>
-      </thead>
+      <% end %>
+    </tbody>
+  </table>
 
-      <tbody>
-        <% @requests.each do |request| %>
-          <tr>
-            <td><h2><%= request.name %></h2></td>
-            <td><%= link_to 'Show', application_request_path %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <br>
+
+  <%= link_to 'New request', new_application_request_path(@application) %>
+  <br>
+  <%= link_to 'My applications', applications_path %>
+
 </div>
-
-<%= link_to 'Back', applications_path %>

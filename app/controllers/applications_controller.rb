@@ -9,8 +9,13 @@ class ApplicationsController < ApplicationController
   # GET /applications/1
   # GET /applications/1.json
   def show
-  	@application = Application.find(params[:id])
-  	@requests = @application.requests
+    begin
+      id = params[:id].to_i
+    rescue
+      id = params[:application_id].to_i
+    end
+
+  	@application = Application.find(id)
   end
 
   # GET /applications/new
@@ -55,6 +60,7 @@ class ApplicationsController < ApplicationController
   # DELETE /applications/1
   # DELETE /applications/1.json
   def destroy
+    @application = Application.find(params[:id])
     @application.destroy
     respond_to do |format|
       format.html { redirect_to applications_url }
