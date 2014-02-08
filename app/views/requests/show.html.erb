@@ -17,9 +17,11 @@
 		Headers: <br><%= @request.headers %>
 	</h6>
 	<br>
-	<h6>
-		Body: <br><%= @request.body%>
-	<br>
+	<% if @request.req_type == 'post' %>
+		<h6>
+			Body: <br><%= @request.body%>
+		<br>
+	<% end %>
 	</h6>
 	<div class="row">
 		<hr>
