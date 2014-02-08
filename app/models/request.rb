@@ -9,7 +9,11 @@ class Request < ActiveRecord::Base
 		:req_type
 
 	validate :json_format
+	validate :url_format
 
+	def refresh_status_code
+		self.passing
+	end
 
 
 	def passing
@@ -73,5 +77,13 @@ class Request < ActiveRecord::Base
 		    end
 		   end
 	  end
+
+	 def url_format
+  	begin
+      !!URI.parse(url)
+    rescue
+      errors[:base] << "Must use valid url"
+    end
+	end
 
 end
